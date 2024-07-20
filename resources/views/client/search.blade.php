@@ -18,7 +18,7 @@
                     <div class="col-lg-4 mb-5">
                         <article class="card">
                             <div class="post-slider slider-sm">
-                                <img src="{{$item->img_thumbnail}}" class="card-img-top" alt="post-thumb">
+                                <img src="{{$item->img_thumbnail}}" width="100%" height="300px" alt="post-thumb">
                             </div>
     
                             <div class="card-body">
