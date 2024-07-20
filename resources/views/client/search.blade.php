@@ -22,7 +22,7 @@
                             </div>
     
                             <div class="card-body">
-                                <h3 class="h4 mb-3"><a class="post-title" href="post-details.html">{{ Str::limit($item->name,30) }}</a></h3>
+                                <h3 class="h4 mb-3"><a class="post-title" href="{{route('chitiet',$item->id)}}">{{ Str::limit($item->name,30) }}</a></h3>
                                 <ul class="card-meta list-inline">
                                     <li class="list-inline-item">
                                         <a href="author-single.html" class="card-meta-author">
@@ -42,7 +42,7 @@
                                     </li>
                                 </ul>
                                 <p>{{ Str::limit($item->overview,100) }}</p>
-                                <a href="post-details.html" class="btn btn-outline-primary">Read More</a>
+                                <a href="{{route('chitiet',$item->id)}}" class="btn btn-outline-primary">Read More</a>
                             </div>
                         </article>
                     </div>
