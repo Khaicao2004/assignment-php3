@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         $categories = Category::query()->pluck('name','id');
         $postsNews = Post::query()->latest('id')->paginate(1);
-        $posts = Post::query()->limit(3)->get();
+        $posts = Post::query()->paginate(3);
         $postRight = Post::query()->limit(6)->get();
         // dd($categories);
         return view('client.index',compact('categories','posts','postsNews','postRight'));

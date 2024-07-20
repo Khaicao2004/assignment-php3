@@ -36,7 +36,7 @@
         <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
             <h3 class="footer-heading mb-4">Promo</h3>
             <a href="#" class="block-6">
-                <img src="/client/images/hero_1.jpg" alt="Image placeholder" class="img-fluid rounded mb-4" />
+                <img src="/client/images/logo.jpg" alt="Image placeholder" class="img-fluid rounded mb-4" width="120"/>
                 <h3 class="font-weight-light mb-0">
                     Finding Your Perfect Shoes
                 </h3>

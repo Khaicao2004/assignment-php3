@@ -12,4 +12,5 @@
             {{ $data->content }}
         </div>
     </div>
+    
 @endsection

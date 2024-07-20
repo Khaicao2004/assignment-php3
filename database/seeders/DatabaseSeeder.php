@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
-        for ($i=0; $i < 10; $i++) { 
+        for ($i=0; $i < 4; $i++) { 
             Category::query()->create([
                 'name' => fake()->realText(15)
             ]);
