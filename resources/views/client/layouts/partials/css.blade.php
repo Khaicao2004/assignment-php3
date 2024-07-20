@@ -10,3 +10,4 @@
 <link rel="stylesheet" href="/client/css/aos.css" />
 
 <link rel="stylesheet" href="/client/css/style.css" />
+<link rel="stylesheet" href="/client/css/slick.css" />

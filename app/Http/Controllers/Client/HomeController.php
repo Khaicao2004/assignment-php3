@@ -12,8 +12,9 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::query()->pluck('name','id');
-        $postsNews = Post::query()->with(['tags','author'])->latest('id')->paginate(1);
-        $posts = Post::query()->with('tags','author')->paginate(3);
+        $find = Post::query()->with('photos')->first();
+        $postsNews = Post::query()->with(['tags','photos','author'])->latest('id')->paginate(1);
+        $posts = Post::query()->with(['tags','photos','author'])->paginate(3);
         $postRight = Post::query()->limit(6)->get();
         // dd($categories);
         return view('client.index',compact('categories','posts','postsNews','postRight'));
