@@ -41,7 +41,7 @@
                                     </li>
                                 </ul>
                                 <p>{{ Str::limit($item->overview,100) }}</p>
-                                <a href="{{route('chitiet',$item->id)}}" class="btn btn-outline-primary">Read More</a>
+                                <a href="{{route('chitiet',$item->id)}}" class="btn btn-outline-primary">Đọc thêm</a>
                             </div>
                         </article>
                     </div>
@@ -61,7 +61,6 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8 mb-5 mb-lg-0">
-                    <h2 class="h5 section-title">Recent Post</h2>
                     @foreach ($postsNews as $item)
                     <article class="card mb-4">
                         <div class="post-slider">
@@ -112,7 +111,7 @@
                             <a
                                 href="{{route('chitiet',$item->id)}}"
                                 class="btn btn-outline-primary"
-                                >Read More</a
+                                >Đọc thêm</a
                             >
                         </div>
                     </article>
@@ -121,8 +120,7 @@
                 </div>
                 <aside class="col-lg-4 sidebar-home">
                     <!-- recent post -->
-                    <div class="widget">
-                        <h2 class="h5 section-title">Recent Post</h2>
+                    <div class="widget">              
                         @foreach ($postRight as $item)
                         <article class="widget-card mb-2" >
                             <div class="d-flex">
@@ -135,6 +133,7 @@
                                         <a
                                             class="{{route('chitiet',$item->id)}}"
                                             href="{{route('chitiet',$item->id)}}"
+                                            style="font-size: 16px"
                                             >{{ Str::limit($item->name,30) }}</a
                                         >
                                     </h5>

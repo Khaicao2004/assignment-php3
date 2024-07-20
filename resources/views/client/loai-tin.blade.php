@@ -44,7 +44,7 @@
                                     </li>
                                 </ul>
                                 <p>{{ Str::limit($item->overview,100) }}</p>
-                                <a href="{{route('chitiet',$item->id)}}" class="btn btn-outline-primary">Read More</a>
+                                <a href="{{route('chitiet',$item->id)}}" class="btn btn-outline-primary">Đọc thêm</a>
                             </div>
                         </article>
                     </div>
