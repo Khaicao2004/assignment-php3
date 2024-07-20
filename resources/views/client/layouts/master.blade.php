@@ -14,10 +14,10 @@
         <header class="site-navbar" role="banner">
            @include('client.layouts.partials.header-top')
 
-           @include('client.layouts.partials.header-nav')
+           @include('client.layouts.partials.header-nav1')
+           @include('client.layouts.partials.header-nav2')
            
         </header>
-
         @yield('content')
 
         <footer class="site-footer border-top">

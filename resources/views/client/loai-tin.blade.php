@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-md-7 site-section-heading text-center pt-4">
-                    <h2>Danh muc tin: {{ $category->name }}</h2>
+                    <h2><b>Danh mục tin:</b> {{ $category->name }}</h2>
                 </div>
             </div>
             <div class="row">
@@ -18,7 +18,7 @@
                     <div class="col-lg-4 mb-5">
                         <article class="card">
                             <div class="post-slider slider-sm">
-                                <img src="{{$item->img_thumbnail}}" class="card-img-top" alt="post-thumb">
+                                <img src="{{$item->img_thumbnail}}" width="100%" height="300px" alt="post-thumb">
                             </div>
     
                             <div class="card-body">
@@ -27,7 +27,7 @@
                                     <li class="list-inline-item">
                                         <a href="author-single.html" class="card-meta-author">
                                             {{-- <img src="images/john-doe.jpg"> --}}
-                                            <span>Charls Xaviar</span>
+                                            <span>{{$item->author->name}}</span>
                                         </a>
                                     </li>              
                                     <li class="list-inline-item">
@@ -35,9 +35,11 @@
                                     </li>
                                     <li class="list-inline-item">
                                         <ul class="card-meta-tag list-inline">
-                                            <li class="list-inline-item"><a href="tags.html">Color</a></li>
-                                            <li class="list-inline-item"><a href="tags.html">Recipe</a></li>
-                                            <li class="list-inline-item"><a href="tags.html">Fish</a></li>
+                                            @foreach ($item->tags as $tag)
+                                            <li class="list-inline-item">
+                                                <a href="tags.html" class="badge bg-info text-dark">{{$tag->name}}</a>
+                                            </li>
+                                           @endforeach
                                         </ul>
                                     </li>
                                 </ul>

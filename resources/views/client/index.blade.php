@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-7 site-section-heading text-center pt-4">
-                    <h2>Tin nổi bật</h2>
+                    <h2 class="mb-5">Tin nổi bật</h2>
                 </div>
             </div>
             <div class="row">
@@ -17,16 +17,16 @@
                     <div class="col-lg-4 mb-5">
                         <article class="card">
                             <div class="post-slider slider-sm">
-                                <img src="{{$item->img_thumbnail}}" class="card-img-top" alt="post-thumb">
+                                <img src="{{$item->img_thumbnail}}" width="100%" height="300px" alt="post-thumb">
                             </div>
     
                             <div class="card-body">
-                                <h3 class="h4 mb-3"><a class="post-title" href="{{route('chitiet',$item->id)}}">{{ Str::limit($item->name,30) }}</a></h3>
+                                <h3 class="h4 mb-3"><a class="post-title" href="{{route('chitiet',$item->id)}}">{{ Str::limit($item->name,20) }}</a></h3>
                                 <ul class="card-meta list-inline">
                                     <li class="list-inline-item">
                                         <a href="author-single.html" class="card-meta-author">
                                             {{-- <img src="images/john-doe.jpg"> --}}
-                                            <span>Charls Xaviar</span>
+                                            <span>{{$item->author->name}}</span>
                                         </a>
                                     </li>              
                                     <li class="list-inline-item">
@@ -34,9 +34,9 @@
                                     </li>
                                     <li class="list-inline-item">
                                         <ul class="card-meta-tag list-inline">
-                                            <li class="list-inline-item"><a href="tags.html">Color</a></li>
-                                            <li class="list-inline-item"><a href="tags.html">Recipe</a></li>
-                                            <li class="list-inline-item"><a href="tags.html">Fish</a></li>
+                                            @foreach ($item->tags as $tag)
+                                            <a href="tags.html" class="badge bg-info text-dark">{{$tag->name}}</a>
+                                            @endforeach
                                         </ul>
                                     </li>
                                 </ul>
@@ -45,10 +45,9 @@
                             </div>
                         </article>
                     </div>
-                    @endforeach
-                    {{ $posts->links() }}
-
-                    </div>
+                    @endforeach            
+                </div>
+                {{ $posts->links() }}
                 </div>
             </div>
         </div>
@@ -87,11 +86,11 @@
                                         href="author-single.html"
                                         class="card-meta-author"
                                     >
-                                        <img
+                                        {{-- <img
                                             src="images/john-doe.jpg"
                                             alt="John Doe"
-                                        />
-                                        <span>John Doe</span>
+                                        /> --}}
+                                        <span>{{$item->author->name}}</span>
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
@@ -99,12 +98,11 @@
                                 </li>
                                 <li class="list-inline-item">
                                     <ul class="card-meta-tag list-inline">
+                                        @foreach ($item->tags as $tag)
                                         <li class="list-inline-item">
-                                            <a href="tags.html">Demo</a>
+                                            <a href="tags.html" class="badge bg-info text-dark">{{$tag->name}}</a>
                                         </li>
-                                        <li class="list-inline-item">
-                                            <a href="tags.html">Elements</a>
-                                        </li>
+                                       @endforeach
                                     </ul>
                                 </li>
                             </ul>
@@ -126,7 +124,7 @@
                     <div class="widget">
                         <h2 class="h5 section-title">Recent Post</h2>
                         @foreach ($postRight as $item)
-                        <article class="widget-card mb-2">
+                        <article class="widget-card mb-2" >
                             <div class="d-flex">
                                 <img
                                    style="width: 80px; height: 80px"

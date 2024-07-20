@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function loaiTin(string $id){
         $categories = Category::query()->pluck('name','id');
-        $posts = Post::query()->where('category_id', $id)->with('category')->get();
+        $posts = Post::query()->where('category_id', $id)->with(['category','author','tags'])->get();
         if($posts->isEmpty()){
             return redirect()->route('home');
           }
