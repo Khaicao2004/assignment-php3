@@ -13,6 +13,6 @@ class Photo extends Model
     ];
     public function posts()
     {
-        return $this->belongsToMany(Post::class);
+        return $this->belongsToMany(Post::class, 'post_photo', 'photo_id', 'post_id');
     }
 }

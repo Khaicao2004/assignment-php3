@@ -1,35 +1,35 @@
 @extends('client.layouts.master')
 
 @section('title')
-    Chi tiết {{ $data->id }}
+    Chi tiết {{ $post->id }}
 @endsection
 
 @section('content')
     @include('client.components.breadcrumb', ['pageName' => 'Chi tiết'])
 
-    <section class="section mt-5">
+    <section class="section mt-5 text-black">
         <div class="container">
             <div class="row justify-content-center">
                 <div class=" col-lg-9   mb-5 mb-lg-0">
                     <article>
                         <div class="post-slider mb-4">
-                            <img src="{{ $data->img_thumbnail }}" width="100%" height="500px" alt="post-thumb">
+                            <img src="{{ $post->img_thumbnail }}" width="100%" height="500px" alt="post-thumb">
                         </div>
 
-                        <h1 class="h2">{{ $data->name }}</h1>
+                        <h1 class="h2">{{ $post->name }}</h1>
                         <ul class="card-meta my-3 list-inline">
                             <li class="list-inline-item">
                                 <a href="author-single.html" class="card-meta-author">
                                     {{-- <img src="images/john-doe.jpg"> --}}
-                                    <span>{{ $data->author->name }}</span>
+                                    <span>{{ $post->author->name }}</span>
                                 </a>
                             </li>
                             <li class="list-inline-item">
-                                <i class="ti-calendar"></i>{{ $data->created_at->format('d/m/Y') }}
+                                <i class="ti-calendar"></i>{{ $post->created_at->format('d/m/Y') }}
                             </li>
                             <li class="list-inline-item">
                                 <ul class="card-meta-tag list-inline">
-                                    @foreach ($data->tags as $tag)
+                                    @foreach ($post->tags as $tag)
                                         <li class="list-inline-item">
                                             <a href="tags.html" class="badge bg-info text-dark">{{ $tag->name }}</a>
                                         </li>
@@ -39,11 +39,11 @@
                         </ul>
                         <div class="content">
                             <div class="image mb-3 mt-3">
-                                @foreach ($data->photos as $photo)
+                                @foreach ($post->photos as $photo)
                                 <img src="{{$photo->file_path}}" alt="" width="100%" class="mb-3">
                                 @endforeach
                             </div>
-                            <p>{{ $data->content }}</p>
+                            <p>{{ $post->content }}</p>
                         </div>
                     </article>
 
@@ -51,62 +51,28 @@
 
                 <div class="col-lg-9 col-md-12">
                     <div class="mb-5 border-top mt-4 pt-5">
-                        <h3 class="mb-4">Comments</h3>
+                        <h3 class="mb-4"><b>Comments</b></h3>
 
+                        @foreach ($post->comments as $comment)         
                         <div class="media d-block d-sm-flex mb-4 pb-4">
-                            <a class="d-inline-block mr-2 mb-3 mb-md-0" href="#">
-                                <img src="images/post/user-01.jpg" class="mr-3 rounded-circle" alt="">
-                            </a>
                             <div class="media-body">
-                                <a href="#!" class="h4 d-inline-block mb-3">Alexender Grahambel</a>
-
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                                    sollicitudin. Cras
-                                    purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-                                    nisi
-                                    vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-
-                                <span class="text-black-800 mr-3 font-weight-600">April 18, 2020 at 6.25 pm</span>
-                                <a class="text-primary font-weight-600" href="#!">Reply</a>
+                                <h4>*{{ $comment->user->name  }}</h4>
+                                <p>{{ $comment->comment }}</p>
+                                <span class="text-black-800 mr-3 font-weight-600">{{ $comment->created_at }}</span>
                             </div>
                         </div>
-                        <div class="media d-block d-sm-flex">
-                            <div class="d-inline-block mr-2 mb-3 mb-md-0" href="#">
-                                <img class="mr-3" src="images/post/arrow.png" alt="">
-                                <a href="#!"><img src="images/post/user-02.jpg" class="mr-3 rounded-circle"
-                                        alt=""></a>
-                            </div>
-                            <div class="media-body">
-                                <a href="#!" class="h4 d-inline-block mb-3">Nadia Sultana Tisa</a>
-
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                                    sollicitudin. Cras
-                                    purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-                                    nisi
-                                    vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-
-                                <span class="text-black-800 mr-3 font-weight-600">April 18, 2020 at 6.25 pm</span>
-                                <a class="text-primary font-weight-600" href="#!">Reply</a>
-                            </div>
-                        </div>
+                        @endforeach     
                     </div>
 
                     <div>
-                        <h3 class="mb-4">Leave a Reply</h3>
-                        <form method="POST">
+                        <h3 class="mb-4">Bình luận</h3>
+                        <form action="{{ route('binhluan',$post) }}" method="POST" class="mb-5">
+                            @csrf
                             <div class="row">
                                 <div class="form-group col-md-12">
+                                    <label for="comment" class="form-label">Nội dung</label>
                                     <textarea class="form-control shadow-none" name="comment" rows="7" required></textarea>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <input class="form-control shadow-none" type="text" placeholder="Name" required>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <input class="form-control shadow-none" type="email" placeholder="Email" required>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <input class="form-control shadow-none" type="url" placeholder="Website">
-                                    <p class="font-weight-bold valid-feedback">OK! You can skip this field.</p>
+                                    <input type="hidden" name="post_id" value="{{ $post->id }}">
                                 </div>
                             </div>
                             <button class="btn btn-primary" type="submit">Comment Now</button>

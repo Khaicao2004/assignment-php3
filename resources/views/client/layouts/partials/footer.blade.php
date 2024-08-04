@@ -35,7 +35,7 @@
         <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
             <h3 class="footer-heading mb-4">Logo</h3>
             <a href="{{route('home') }}" class="block-6">
-                <img src="/client/images/logo.jpg" alt="Image placeholder" class="img-fluid rounded mb-4" width="120"/>
+                <img src="/client/images/logo2.png" alt="Image placeholder" class="img-fluid rounded mb-4" width="120"/>
             </a>
         </div>
         <div class="col-md-6 col-lg-4">

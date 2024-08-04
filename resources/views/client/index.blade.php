@@ -5,11 +5,11 @@
 @endsection
 
 @section('content')
-    <div class="site-section block-3 site-blocks-2 bg-light">
+    <div class="site-section block-3 site-blocks-2 bg-light text-black">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-7 site-section-heading text-center pt-4">
-                    <h2 class="mb-5">Tin nổi bật</h2>
+                    <h2 class="mb-5"><b>Tin nổi bật</b></h2>
                 </div>
             </div>
             <div class="row">
@@ -21,13 +21,10 @@
                             </div>
     
                             <div class="card-body">
-                                <h3 class="h4 mb-3"><a class="post-title" href="{{route('chitiet',$item->id)}}">{{ Str::limit($item->name,20) }}</a></h3>
+                                <h3 class="h4 mb-3"><a class="post-title" href="{{route('chitiet',$item->slug)}}">{{ Str::limit($item->name,20) }}</a></h3>
                                 <ul class="card-meta list-inline">
                                     <li class="list-inline-item">
-                                        <a href="author-single.html" class="card-meta-author">
-                                            {{-- <img src="images/john-doe.jpg"> --}}
-                                            <span>{{$item->author->name}}</span>
-                                        </a>
+                                            <h5>{{$item->author->name}}</h5>
                                     </li>              
                                     <li class="list-inline-item">
                                         <i class="ti-calendar"></i>{{$item->created_at->format('d/m/Y')}}
@@ -35,13 +32,13 @@
                                     <li class="list-inline-item">
                                         <ul class="card-meta-tag list-inline">
                                             @foreach ($item->tags as $tag)
-                                            <a href="tags.html" class="badge bg-info text-dark">{{$tag->name}}</a>
+                                            <h6 class="badge bg-info text-white">{{$tag->name}}</h6>
                                             @endforeach
                                         </ul>
                                     </li>
                                 </ul>
                                 <p>{{ Str::limit($item->overview,100) }}</p>
-                                <a href="{{route('chitiet',$item->id)}}" class="btn btn-outline-primary">Đọc thêm</a>
+                                <a href="{{route('chitiet',$item->slug)}}" class="btn btn-outline-primary">Đọc thêm</a>
                             </div>
                         </article>
                     </div>
@@ -52,11 +49,11 @@
             </div>
         </div>
     </div>
-    <section class="section-sm">
-        <div class="container">
+    <section class="section-sm text-black">
+        <div class="container ">
             <div class="row justify-content-center mb-5 mt-5">
                 <div class="col-md-7 site-section-heading text-center pt-4">
-                    <h2>Tin mới nhất</h2>
+                    <h2><b>Tin mới nhất</b></h2>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -74,23 +71,14 @@
                             <h3 class="mb-3">
                                 <a
                                     class="post-title"
-                                    href="{{route('chitiet',$item->id)}}"
+                                    href="{{route('chitiet',$item->slug)}}"
                                 >
                                 {{ Str::limit($item->name,30) }}
                             </a>
                             </h3>
                             <ul class="card-meta list-inline">
                                 <li class="list-inline-item">
-                                    <a
-                                        href="author-single.html"
-                                        class="card-meta-author"
-                                    >
-                                        {{-- <img
-                                            src="images/john-doe.jpg"
-                                            alt="John Doe"
-                                        /> --}}
-                                        <span>{{$item->author->name}}</span>
-                                    </a>
+                                        <h5>{{$item->author->name}}</h5>
                                 </li>
                                 <li class="list-inline-item">
                                     <i class="ti-calendar"></i>{{$item->created_at->format('d/m/Y')}}
@@ -99,7 +87,7 @@
                                     <ul class="card-meta-tag list-inline">
                                         @foreach ($item->tags as $tag)
                                         <li class="list-inline-item">
-                                            <a href="tags.html" class="badge bg-info text-dark">{{$tag->name}}</a>
+                                            <h6 class="badge bg-info text-white">{{$tag->name}}</h6>
                                         </li>
                                        @endforeach
                                     </ul>
@@ -109,7 +97,7 @@
                                 {{ Str::limit($item->overview,100) }}
                             </p>
                             <a
-                                href="{{route('chitiet',$item->id)}}"
+                                href="{{route('chitiet',$item->slug)}}"
                                 class="btn btn-outline-primary"
                                 >Đọc thêm</a
                             >
@@ -131,8 +119,8 @@
                                 <div class="ml-3">
                                     <h5>
                                         <a
-                                            class="{{route('chitiet',$item->id)}}"
-                                            href="{{route('chitiet',$item->id)}}"
+                                            class="{{route('chitiet',$item->slug)}}"
+                                            href="{{route('chitiet',$item->slug)}}"
                                             style="font-size: 16px"
                                             >{{ Str::limit($item->name,30) }}</a
                                         >

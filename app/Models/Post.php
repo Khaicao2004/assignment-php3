@@ -12,10 +12,16 @@ class Post extends Model
         'category_id',
         'author_id',
         'name',
+        'slug',
+        'sku',
         'img_thumbnail',
         'overview',
         'content',
+        'is_active'
     ];
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -30,6 +36,6 @@ class Post extends Model
     }
     public function photos()
     {
-        return $this->belongsToMany(Photo::class,'post_photo');
+        return $this->belongsToMany(Photo::class,'post_photo','post_id','photo_id');
     }
 }
