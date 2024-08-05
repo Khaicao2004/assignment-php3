@@ -41,11 +41,16 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="row">
-                                        <div class="col-md-2">
+                                        <div class="col-3">
                                             <div class="form-check form-switch form-switch-primary">
                                                 <input class="form-check-input" type="checkbox" role="switch"
                                                     name="is_active" id="is_active" checked>
-                                                <label class="form-check-label" for="is_active">Is Active</label>
+                                                <label class="form-check-label" for="is_active">Hoạt động</label>
+                                            </div>
+                                            <div class="form-check form-switch form-switch-primary mt-2">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    name="is_hot" id="is_hot" checked>
+                                                <label class="form-check-label" for="is_hot">Tin nổi bật</label>
                                             </div>
                                         </div>
                                     </div>
@@ -79,47 +84,54 @@
                         <div class="live-preview">
                             <div class="row gy-4">
                                 <div class="col-7">
-                                   <div class="mt-3">
-                                    <label class="form-label d-flex">
-                                        <input type="radio" name="author_type" value="oldAuthor" class="me-2"  checked onclick="showFormAuthor()"> Chọn tác giả cũ
-                                        <input type="radio" name="author_type" value="newAuthor" class="mx-2" onclick="showFormAuthor()"> Thêm tác giả mới
-                                    </label>
-                                   </div>
-                                   <div id="new-author-form" style="display: none;">
-                                       <div>
-                                           <label for="name" class="form-label">Name</label>
-                                           <input type="text" class="form-control" id="name" name="author[name]">
-                                       </div>
-                                       <div class="mt-3">
-                                           <label for="email" class="form-label">email</label>
-                                           <input type="email" class="form-control" id="email" name="author[email]">
-                                       </div>
-                                       <div class="mt-3">
-                                           <label for="phone" class="form-label">Phone</label>
-                                           <input type="text" class="form-control" id="phone" name="author[phone]">
-                                       </div>
-                                       <div class="mt-3">
-                                           <label for="address" class="form-label">Address</label>
-                                           <input type="text" class="form-control" id="address" name="author[address]">
-                                       </div>
-                                   </div>
+                                    <div class="mt-3">
+                                        <label class="form-label d-flex">
+                                            <input type="radio" name="author_type" value="oldAuthor" class="me-2"
+                                                checked onclick="showFormAuthor()"> Chọn tác giả cũ
+                                            <input type="radio" name="author_type" value="newAuthor" class="mx-2"
+                                                onclick="showFormAuthor()"> Thêm tác giả mới
+                                        </label>
+                                    </div>
+                                    <div id="new-author-form" style="display: none;">
+                                        <div>
+                                            <label for="name" class="form-label">Name</label>
+                                            <input type="text" class="form-control" id="name" name="author[name]">
+                                            @error('author.name')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="mt-3">
+                                            <label for="email" class="form-label">email</label>
+                                            <input type="email" class="form-control" id="email"
+                                                name="author[email]">
+                                            @error('author.email')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="mt-3">
+                                            <label for="phone" class="form-label">Phone</label>
+                                            <input type="text" class="form-control" id="phone"
+                                                name="author[phone]">
+                                            @error('author.phone')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="mt-3">
+                                            <label for="address" class="form-label">Address</label>
+                                            <input type="text" class="form-control" id="address"
+                                                name="author[address]">
+                                            @error('author.address')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                     <div class="mt-3" id="old-author-form">
                                         <select name="author_id" class="form-select">
                                             @foreach ($authors as $id => $name)
+                                                <option value="">---Chọn tác giả---</option>
                                                 <option value="{{ $id }}">{{ $name }}</option>
                                             @endforeach
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="col-5">
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="form-check form-switch form-switch-primary">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                    name="is_active" id="is_active" checked>
-                                                <label class="form-check-label" for="is_active">Is Active</label>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <!--end col-->
@@ -143,7 +155,8 @@
                                 <div class="col-md-12">
                                     <div>
                                         <label for="tags" class="form-label">Photos</label>
-                                        <input type="file" name="photos[]" id="photos" class="form-control" multiple>
+                                        <input type="file" name="photos[]" id="photos" class="form-control"
+                                            multiple>
                                     </div>
                                 </div>
 
@@ -197,22 +210,25 @@
 @endsection
 
 @section('script-libs')
-    <script src="https:////cdn.ckeditor.com/4.8.0/basic/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.8.0/ckeditor.js"
+        integrity="sha512-lKwk82OTcXaujpLk2G2rplJ8ntniQ5fV/1qlg7EMqyF88lJsEgZaVFP9wxb/ZSCop7CfTsAxnTUg/vvZlFzyQw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 
 @section('scripts')
     <script>
         CKEDITOR.replace('content');
-    function showFormAuthor(){
-        const authorType = document.querySelector('input[name="author_type"]:checked').value;
-        // console.log(authorType);
-        if(authorType === 'oldAuthor'){
-            document.getElementById('old-author-form').style.display = 'block';
-            document.getElementById('new-author-form').style.display = 'none';
-        }else{
-            document.getElementById('old-author-form').style.display = 'none';
-            document.getElementById('new-author-form').style.display = 'block';
+
+        function showFormAuthor() {
+            const authorType = document.querySelector('input[name="author_type"]:checked').value;
+            // console.log(authorType);
+            if (authorType === 'oldAuthor') {
+                document.getElementById('old-author-form').style.display = 'block';
+                document.getElementById('new-author-form').style.display = 'none';
+            } else {
+                document.getElementById('old-author-form').style.display = 'none';
+                document.getElementById('new-author-form').style.display = 'block';
+            }
         }
-    }
     </script>
 @endsection

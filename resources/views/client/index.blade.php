@@ -13,11 +13,11 @@
                 </div>
             </div>
             <div class="row">
-                    @foreach ($posts as $item)
+                    @foreach ($postHot as $item)
                     <div class="col-lg-4 mb-5">
                         <article class="card">
                             <div class="post-slider slider-sm">
-                                <img src="{{$item->img_thumbnail}}" width="100%" height="300px" alt="post-thumb">
+                                <img src="{{Storage::url($item->img_thumbnail)}}" width="100%" height="300px" alt="post-thumb">
                             </div>
     
                             <div class="card-body">
@@ -44,7 +44,6 @@
                     </div>
                     @endforeach            
                 </div>
-                {{ $posts->links() }}
                 </div>
             </div>
         </div>
@@ -62,7 +61,7 @@
                     <article class="card mb-4">
                         <div class="post-slider">
                             <img
-                                src="{{$item->img_thumbnail}}"
+                                src="{{Storage::url($item->img_thumbnail)}}"
                                 style="width: 100%; height: 350px;"
                                 alt="post-thumb"
                             />
@@ -109,12 +108,12 @@
                 <aside class="col-lg-4 sidebar-home">
                     <!-- recent post -->
                     <div class="widget">              
-                        @foreach ($postRight as $item)
+                        @foreach ($postsNews as $item)
                         <article class="widget-card mb-2" >
                             <div class="d-flex">
                                 <img
                                    style="width: 80px; height: 80px"
-                                    src="{{$item->img_thumbnail}}"
+                                    src="{{Storage::url($item->img_thumbnail)}}"
                                 />
                                 <div class="ml-3">
                                     <h5>

@@ -15,7 +15,7 @@
                         <h5 class="text-primary">Chào mừng !</h5>
                         <p class="text-muted">Vui lòng đăng ký tài khoản</p>
                     </div>
-                    <div class="p-2 mt-4">
+                    <div class="p-2 mt-4 mb-3">
                         <form action="{{ route('register') }}" method="POST" class="mt-5">
                             @csrf
                             <div class="mb-3">

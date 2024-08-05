@@ -9,7 +9,8 @@ class Photo extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'file_path'
+        'file_path',
+        'is_active'
     ];
     public function posts()
     {

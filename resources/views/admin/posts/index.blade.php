@@ -51,6 +51,7 @@
                     <th>Category</th>
                     <th>Author</th>
                     <th>Name</th>
+                    <th>View</th>
                     <th>Is Active</th>
                     <th>Created at</th>
                     <th>Updated at</th>
@@ -75,9 +76,19 @@
                     <td>{{$item->category->name}}</td>
                     <td>{{$item->author->name}}</td>
                     <td>{{$item->name}}</td>
-                    <td>{!!$item->is_active 
-                        ? '<span class="badge bg-primary">YES</span>' 
-                        : '<span class="badge bg-danger">NO</span>'!!}</td>
+                    <td>{{$item->is_view}}</td>
+                    <td>
+                        <div class="form-check form-switch form-switch-primary">
+                            <input class="form-check-input" type="checkbox" role="switch" name="is_active"
+                                id="is_active" @if ($item->is_active === 1)checked @endif disabled>
+                            <label class="form-check-label" for="is_active">Is Active</label>
+                        </div>
+                        <div class="form-check form-switch form-switch-primary">
+                            <input class="form-check-input" type="checkbox" role="switch" name="is_hot"
+                                id="is_hot" @if ($item->is_hot === 1)checked @endif disabled>
+                            <label class="form-check-label" for="is_hot">Is hot</label>
+                        </div>
+                        </td>
                     <td>{{$item->created_at}}</td>
                     <td>{{$item->updated_at}}</td>
                     <td>

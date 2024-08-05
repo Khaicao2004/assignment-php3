@@ -15,8 +15,10 @@ class Post extends Model
         'slug',
         'sku',
         'img_thumbnail',
+        'is_view',
         'overview',
         'content',
+        'is_hot',
         'is_active'
     ];
     public function comments(){

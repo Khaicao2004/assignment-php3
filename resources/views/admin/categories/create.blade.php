@@ -19,7 +19,10 @@
                                 <div class="col-6">
                                     <div>
                                         <label for="name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name">
+                                        <input type="text" class="form-control mb-2" id="name" name="name" value="{{ old('name') }}">
+                                        @error('name')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                      <div class="col-6">

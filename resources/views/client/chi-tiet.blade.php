@@ -13,16 +13,13 @@
                 <div class=" col-lg-9   mb-5 mb-lg-0">
                     <article>
                         <div class="post-slider mb-4">
-                            <img src="{{ $post->img_thumbnail }}" width="100%" height="500px" alt="post-thumb">
+                            <img src="{{ Storage::url($post->img_thumbnail) }}" width="100%" height="500px" alt="post-thumb">
                         </div>
 
                         <h1 class="h2">{{ $post->name }}</h1>
                         <ul class="card-meta my-3 list-inline">
-                            <li class="list-inline-item">
-                                <a href="author-single.html" class="card-meta-author">
-                                    {{-- <img src="images/john-doe.jpg"> --}}
-                                    <span>{{ $post->author->name }}</span>
-                                </a>
+                            <li class="list-inline-item">    
+                                    <h5 >{{ $post->author->name }}</h5>
                             </li>
                             <li class="list-inline-item">
                                 <i class="ti-calendar"></i>{{ $post->created_at->format('d/m/Y') }}
@@ -31,7 +28,7 @@
                                 <ul class="card-meta-tag list-inline">
                                     @foreach ($post->tags as $tag)
                                         <li class="list-inline-item">
-                                            <a href="tags.html" class="badge bg-info text-dark">{{ $tag->name }}</a>
+                                            <h6 class="badge bg-info text-dark">{{ $tag->name }}</h6>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -39,11 +36,12 @@
                         </ul>
                         <div class="content">
                             <div class="image mb-3 mt-3">
-                                @foreach ($post->photos as $photo)
-                                <img src="{{$photo->file_path}}" alt="" width="100%" class="mb-3">
-                                @endforeach
+                                {{-- @foreach ($post->photos as $photo)
+                                <img src="{{Storage::url($photo->file_path)}}" alt="" width="100%" class="mb-3">
+                                @endforeach --}}
+                                {!! $post->content !!}
                             </div>
-                            <p>{{ $post->content }}</p>
+                            {{-- {!! strip_tags($post->content, '<b><i><u>') !!}     --}}
                         </div>
                     </article>
 
@@ -66,7 +64,7 @@
 
                     <div>
                         <h3 class="mb-4">Bình luận</h3>
-                        <form action="{{ route('binhluan',$post) }}" method="POST" class="mb-5">
+                        <form action="{{ route('binhluan',$post->slug) }}" method="POST" class="mb-5">
                             @csrf
                             <div class="row">
                                 <div class="form-group col-md-12">

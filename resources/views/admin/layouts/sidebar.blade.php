@@ -50,11 +50,28 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarAuthors" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarAuthors">
+                        <i class="bx bx-menu"></i>
+                        <span data-key="t-layouts">Tác giả</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarAuthors">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('authors.index') }}" class="nav-link">Danh sách</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('authors.create') }}" class="nav-link">Thêm mới</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                    <li class="nav-item">
                        <a class="nav-link menu-link" href="#sidebarCatalogues" data-bs-toggle="collapse" role="button"
                            aria-expanded="false" aria-controls="sidebarCatalogues">
                            <i class="bx bx-menu"></i>
-                           <span data-key="t-layouts">Danh mục sản phẩm</span>
+                           <span data-key="t-layouts">Danh mục bài viết</span>
                        </a>
                        <div class="collapse menu-dropdown" id="sidebarCatalogues">
                            <ul class="nav nav-sm flex-column">
@@ -67,6 +84,40 @@
                            </ul>
                        </div>
                    </li>
+                   <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarTags" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarTags">
+                        <i class="bx bx-menu"></i>
+                        <span data-key="t-layouts">Tag</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarTags">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('tags.index') }}" class="nav-link">Danh sách</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('tags.create') }}" class="nav-link">Thêm mới</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarPhotos" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarPhotos">
+                        <i class="bx bx-menu"></i>
+                        <span data-key="t-layouts">Photo</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarPhotos">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('photos.index') }}" class="nav-link">Danh sách</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('photos.create') }}" class="nav-link">Thêm mới</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                    <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarPost" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarPost">

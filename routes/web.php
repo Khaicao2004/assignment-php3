@@ -42,7 +42,7 @@ Route::controller(PostController::class)->group(function(){
     Route::get('category/{slug}', 'loaiTin')->name('loaitin');
     Route::get('detail/{slug}', 'detail')->name('chitiet');
     //bình luận
-    Route::post('binh-luan/{post}'   , 'binhLuan')
+    Route::post('binh-luan/{slug}'   , 'binhLuan')
         ->name('binhluan')
         ->middleware(['auth','isMember']);
 });

@@ -21,8 +21,10 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('sku')->unique();
             $table->string('img_thumbnail')->nullable();
+            $table->unsignedInteger('is_view')->default(0);
             $table->text('overview')->nullable();
             $table->text('content')->nullable();
+            $table->boolean('is_hot')->default(true);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

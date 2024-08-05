@@ -5,7 +5,7 @@
 
 @section('content')
     <h2 class="text-center mt-5">Đăng nhập</h2>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-3">
       <div class="col-md-8 col-lg-6 col-xl-5">
           <div class="card mt-4">
 

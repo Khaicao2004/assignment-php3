@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
 class UserController extends Controller
@@ -31,24 +34,15 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
         try{
-            DB::beginTransaction();
-            $data = $request->all();
-            if($request->password != $request->repassword){
-                return back();
-            }else{
-                User::query()->create($data);
-                unset($request->repassword);
-            }
-            // dd($data);
-            DB::commit();
+            User::query()->create($request->all());
+            return redirect()->route('users.index')->with('success', 'Thêm thành công');
         }catch(\Exception $exception){
-            DB::rollBack();
-            return back();
+            Log::error('Lỗi thêm bài viết: ' . $exception->getMessage());
+            return back()->with('error','Lỗi');
         }
-     return redirect()->route('admin.users.index');
     }
 
     /**
@@ -70,11 +64,17 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $data =$request->all();
-        $user->update($data);
-        return back();
+        try{
+            $data =$request->all();
+            $user->update($data);
+            return back()->with('success', 'Cập nhật thành công');
+        }catch(\Exception $exception){
+            Log::error('Lỗi: ' . $exception->getMessage());
+            return back()->with('error','Lỗi');
+        }
+       
     }
 
     /**

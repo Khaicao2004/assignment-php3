@@ -12,7 +12,8 @@ class Author extends Model
         'name',
         'email',
         'phone',
-        'address'
+        'address',
+        'is_active'
     ];
     public function posts(){
         return $this->hasMany(Post::class);

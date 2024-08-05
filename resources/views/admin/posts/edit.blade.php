@@ -203,9 +203,7 @@
     </form>
 @endsection
 
-@section('script-libs')
-    <script src="https:////cdn.ckeditor.com/4.8.0/basic/ckeditor.js"></script>
-@endsection
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.8.0/ckeditor.js" integrity="sha512-lKwk82OTcXaujpLk2G2rplJ8ntniQ5fV/1qlg7EMqyF88lJsEgZaVFP9wxb/ZSCop7CfTsAxnTUg/vvZlFzyQw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 @section('scripts')
     <script>
