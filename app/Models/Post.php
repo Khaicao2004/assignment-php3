@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'category_id',
         'author_id',
@@ -15,9 +16,9 @@ class Post extends Model
         'slug',
         'sku',
         'img_thumbnail',
-        'is_view',
         'overview',
         'content',
+        'is_view',
         'is_hot',
         'is_active'
     ];

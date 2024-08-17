@@ -34,39 +34,39 @@
                <ul class="navbar-nav" id="navbar-nav">
                    <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                    <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarUsers" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarUsers">
-                        <i class=" bx bx-user-circle"></i>
-                        <span data-key="t-layouts">Tài khoản</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarUsers">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('users.index') }}" class="nav-link">Danh sách</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('users.create') }}" class="nav-link">Thêm mới</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarAuthors" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarAuthors">
-                        <i class="bx bx-menu"></i>
-                        <span data-key="t-layouts">Tác giả</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarAuthors">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('authors.index') }}" class="nav-link">Danh sách</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('authors.create') }}" class="nav-link">Thêm mới</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                       <a class="nav-link menu-link" href="#sidebarUsers" data-bs-toggle="collapse" role="button"
+                           aria-expanded="false" aria-controls="sidebarUsers">
+                           <i class=" bx bx-user-circle"></i>
+                           <span data-key="t-layouts">Tài khoản</span>
+                       </a>
+                       <div class="collapse menu-dropdown" id="sidebarUsers">
+                           <ul class="nav nav-sm flex-column">
+                               <li class="nav-item">
+                                   <a href="{{ route('users.index') }}" class="nav-link">Danh sách</a>
+                               </li>
+                               <li class="nav-item">
+                                   <a href="{{ route('users.create') }}" class="nav-link">Thêm mới</a>
+                               </li>
+                           </ul>
+                       </div>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link menu-link" href="#sidebarAuthors" data-bs-toggle="collapse" role="button"
+                           aria-expanded="false" aria-controls="sidebarAuthors">
+                           <i class="bx bx-menu"></i>
+                           <span data-key="t-layouts">Tác giả</span>
+                       </a>
+                       <div class="collapse menu-dropdown" id="sidebarAuthors">
+                           <ul class="nav nav-sm flex-column">
+                               <li class="nav-item">
+                                   <a href="{{ route('authors.index') }}" class="nav-link">Danh sách</a>
+                               </li>
+                               <li class="nav-item">
+                                   <a href="{{ route('authors.create') }}" class="nav-link">Thêm mới</a>
+                               </li>
+                           </ul>
+                       </div>
+                   </li>
                    <li class="nav-item">
                        <a class="nav-link menu-link" href="#sidebarCatalogues" data-bs-toggle="collapse" role="button"
                            aria-expanded="false" aria-controls="sidebarCatalogues">
@@ -85,52 +85,69 @@
                        </div>
                    </li>
                    <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarTags" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarTags">
-                        <i class="bx bx-menu"></i>
-                        <span data-key="t-layouts">Tag</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarTags">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('tags.index') }}" class="nav-link">Danh sách</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('tags.create') }}" class="nav-link">Thêm mới</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarPhotos" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarPhotos">
-                        <i class="bx bx-menu"></i>
-                        <span data-key="t-layouts">Photo</span>
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarPhotos">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('photos.index') }}" class="nav-link">Danh sách</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('photos.create') }}" class="nav-link">Thêm mới</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                       <a class="nav-link menu-link" href="#sidebarTags" data-bs-toggle="collapse" role="button"
+                           aria-expanded="false" aria-controls="sidebarTags">
+                           <i class="bx bx-menu"></i>
+                           <span data-key="t-layouts">Tag</span>
+                       </a>
+                       <div class="collapse menu-dropdown" id="sidebarTags">
+                           <ul class="nav nav-sm flex-column">
+                               <li class="nav-item">
+                                   <a href="{{ route('tags.index') }}" class="nav-link">Danh sách</a>
+                               </li>
+                               <li class="nav-item">
+                                   <a href="{{ route('tags.create') }}" class="nav-link">Thêm mới</a>
+                               </li>
+                           </ul>
+                       </div>
+                   </li>
                    <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarPost" data-bs-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="sidebarPost">
+                       <a class="nav-link menu-link" href="#sidebarPhotos" data-bs-toggle="collapse" role="button"
+                           aria-expanded="false" aria-controls="sidebarPhotos">
+                           <i class="bx bx-menu"></i>
+                           <span data-key="t-layouts">Photo</span>
+                       </a>
+                       <div class="collapse menu-dropdown" id="sidebarPhotos">
+                           <ul class="nav nav-sm flex-column">
+                               <li class="nav-item">
+                                   <a href="{{ route('photos.index') }}" class="nav-link">Danh sách</a>
+                               </li>
+                               <li class="nav-item">
+                                   <a href="{{ route('photos.create') }}" class="nav-link">Thêm mới</a>
+                               </li>
+                           </ul>
+                       </div>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link menu-link" href="#sidebarPost" data-bs-toggle="collapse" role="button"
+                           aria-expanded="false" aria-controls="sidebarPost">
+                           <i class="bx bx-menu"></i>
+                           <span data-key="t-layouts">Bài viết</span>
+                       </a>
+                       <div class="collapse menu-dropdown" id="sidebarPost">
+                           <ul class="nav nav-sm flex-column">
+                               <li class="nav-item">
+                                   <a href="{{ route('posts.index') }}" class="nav-link">Danh sách</a>
+                               </li>
+                               <li class="nav-item">
+                                   <a href="{{ route('posts.create') }}" class="nav-link">Thêm mới</a>
+                               </li>
+                           </ul>
+                       </div>
+                   </li>
+                   <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarUpgrade" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarUpgrade">
                         <i class="bx bx-menu"></i>
-                        <span data-key="t-layouts">Bài viết</span>
+                        <span data-key="t-layouts">Nâng cấp tài khoản</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarPost">
+                    <div class="collapse menu-dropdown" id="sidebarUpgrade">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('posts.index') }}" class="nav-link">Danh sách</a>
+                                <a href="{{ route('upgrades.index') }}" class="nav-link">Danh sách</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('posts.create') }}" class="nav-link">Thêm mới</a>
+                                <a href="{{ route('upgrades.create') }}" class="nav-link">Thêm mới</a>
                             </li>
                         </ul>
                     </div>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\PostController;
+use App\Http\Controllers\Client\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,4 +48,14 @@ Route::controller(PostController::class)->group(function(){
         ->middleware(['auth','isMember']);
 });
 
+Route::middleware(['auth','isMember'])
+->controller(UserController::class)
+->group(function(){
+    //profile
+    Route::get('profile',        'profile')->name('profile');
+    Route::put('profile/{user}', 'updateProfile')->name('updateProfile');
 
+    //update Account
+    Route::get('upgrade-account', 'showFormAccount')->name('showUpgradeAccount');
+    Route::post('upgrade-account', 'upgradeAccount')->name('upgradeAccount');
+});

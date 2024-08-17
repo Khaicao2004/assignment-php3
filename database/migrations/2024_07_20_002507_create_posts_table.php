@@ -26,6 +26,7 @@ return new class extends Migration
             $table->text('content')->nullable();
             $table->boolean('is_hot')->default(true);
             $table->boolean('is_active')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('type')->default(User::TYPE_MEMBER);
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

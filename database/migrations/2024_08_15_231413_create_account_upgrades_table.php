@@ -12,14 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('authors', function (Blueprint $table) {
+        Schema::create('account_upgrades', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
-            $table->string('image')->nullable();
-            $table->string('phone')->unique();
-            $table->string('address');
-            $table->boolean('is_active')->default(true);
-            $table->softDeletes();
+            $table->string('phone')->unique()->nullable(); // Lưu số điện thoại
+            $table->string('address')->nullable(); // Lưu địa chỉ
+            $table->string('image')->nullable(); // Lưu đường dẫn hình ảnh
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('authors');
+        Schema::dropIfExists('account_upgrades');
     }
 };

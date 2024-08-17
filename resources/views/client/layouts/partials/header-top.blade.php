@@ -17,26 +17,41 @@
 
             <div class="col-6 col-md-4 order-3 order-md-3 text-right">
                 <div class="site-top-icons">
-                    <ul>
-                    @if (!Auth::user())
-                    <li>
-                        <a href="{{ route('login') }}"><span class="icon icon-person"></span></a>
-                    </li>
-                        
-                    @else
-                    <li>
-                    <a>Xin chao ! {{ Auth::user()->name }}</a>
-                    </li>
-                    <li>
-                        <form action="{{ route('logout') }}" method="POST" class="d-flex">
-                            @csrf
-                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i></button>
-                        </form>
-                    </li>
-                    @endif
+                    <ul class="navbar-nav">
+                        @if (!Auth::user())
+                            <li class="nav-item">
+                                <a href="{{ route('login') }}" class="nav-link">
+                                    <span class="icon icon-person"></span>
+                                </a>
+                            </li>
+                        @else
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Xin chào, {{ Auth::user()->name }}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                        <i class="fa-solid fa-user"></i> Thông tin cá nhân
+                                    </a>
+                                    @if(Auth::user()->type == 'member')
+                                        <a class="dropdown-item" href="{{ route('showUpgradeAccount') }}">
+                                            <i class="fa-solid fa-arrow-up"></i> Nâng cấp tài khoản
+                                        </a>
+                                    @endif
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                                        </button>
+                                    </form>
+                                </div>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
+            
+            
         </div>
     </div>
 </div>

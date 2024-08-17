@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    Danh sách tác giả
+    Danh sách tài khoản nâng cấp
 @endsection
 
 @section('content')
@@ -9,12 +9,12 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">Danh sách tác giả</h4>
+                <h4 class="mb-sm-0">Danh sách tài khoản nâng cấp</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item">
-                            <a href="javascript: void(0);">Tác giả</a>
+                            <a href="javascript: void(0);">Tài khoản nâng cấp</a>
                         </li>
                         <li class="breadcrumb-item active">
                             Danh sách
@@ -22,11 +22,6 @@
                     </ol>
                 </div>
             </div>
-            @if (session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session()->get('success') }}
-                </div>
-            @endif
         </div>
     </div>
     <!-- end page title -->
@@ -37,7 +32,7 @@
                     <h5 class="card-title mb-0">
                         Danh sách
                     </h5>
-                    <a href="{{ route('authors.create') }}" class="btn btn-primary mb-3">Thêm mới</a>
+                    <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Thêm mới</a>
                 </div>
                 <div class="card-body">
                     <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle"
@@ -50,7 +45,7 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Address</th>
-                                <th>Is Active</th>
+                                <th>Status</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
                                 <th>Action</th>
@@ -69,27 +64,26 @@
                                     <td>{{ $item->phone }}</td>
                                     <td>{{ $item->address }}</td>
                                     <td>
-                                        <div class="form-check form-switch form-switch-primary">
-                                            <input class="form-check-input" type="checkbox" role="switch" name="is_active"
-                                                id="is_active" @if ($item->is_active === 1) checked @endif disabled>
-                                            <label class="form-check-label" for="is_active">Is Active</label>
-                                        </div>
+                                        @if ($item->status === 'pending')
+                                            <span class="badge bg-warning text-white">Chờ xác nhận</span>
+                                        @elseif ($item->status === 'approved')
+                                            <span class="badge bg-success text-white">Xác nhận</span>
+                                        @else
+                                            <span class="badge bg-danger text-white">Từ chối</span>
+                                        @endif
                                     </td>
                                     <td>{{ $item->created_at }}</td>
                                     <td>{{ $item->updated_at }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="{{ route('authors.show', $item->id) }}"
-                                                class="btn btn-primary me-2">Xem</a>
-                                            <a href="{{ route('authors.edit', $item->id) }}"
-                                                class="btn btn-warning me-2">Sửa</a>
-                                            <form action="{{ route('authors.destroy', $item->id) }}" method="post">
+                                            <a href="{{ route('upgrades.edit', $item->id) }}"
+                                                class="btn btn-warning  me-2">Sửa</a>
+                                            <form action="{{ route('upgrades.destroy', $item->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" onclick="return confirm('Chắc chắn chưa?')"
-                                                    class="btn btn-danger">Xóa</button>
+                                                    class="btn btn-danger ">Xóa</button>
                                             </form>
-
                                         </div>
                                     </td>
                                 </tr>
@@ -103,6 +97,7 @@
     </div>
     <!--end row-->
 @endsection
+
 @section('style-libs')
     <!--datatable css-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />

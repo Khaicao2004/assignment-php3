@@ -74,7 +74,7 @@
                         <img src="{{ $url }}" alt="" width="100px">
                     </td>
                     <td>{{$item->category->name}}</td>
-                    <td>{{$item->author->name}}</td>
+                    <td>{{$item->author->user->name}}</td>
                     <td>{{$item->name}}</td>
                     <td>{{$item->is_view}}</td>
                     <td>

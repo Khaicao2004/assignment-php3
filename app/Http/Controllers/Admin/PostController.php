@@ -11,6 +11,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +27,17 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data = Post::query()->latest('id')->get();
+        $this->authorize('viewAny', Post::class);
+
+        $user = Auth::user();
+
+        if ($user->type === 'admin') {
+            $data = Post::query()->with('author.user')->latest('id')->get();
+        } else {
+            $data = Post::query()->with('author.user')
+                ->whereRelation('author', 'user_id', $user->id)
+                ->latest('id')->get();
+        }
         return view(self::PATH_VIEW . __FUNCTION__, compact('data'));
     }
 
@@ -35,12 +46,10 @@ class PostController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Post::class);
         $categories = Category::query()->pluck('name', 'id');
-        $authors = Author::query()
-            ->where('is_active', true)
-            ->pluck('name', 'id');
         $tags = Tag::query()->pluck('name', 'id');
-        return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'tags', 'authors'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'tags'));
     }
 
     /**
@@ -48,42 +57,25 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        // dd($request->all());
+        // Log::info('Request Data:', $request->all());
+        $this->authorize('create', Post::class);
         $dataPosts = $request->except(['tags', 'photos', 'img_thumbnail']);
+        $dataPosts['author_id'] =  Auth::user()->id;
         $dataPosts['is_hot'] = isset($dataPosts['is_hot']) ? 1 : 0;
         $dataPosts['is_active'] = isset($dataPosts['is_active']) ? 1 : 0;
         $dataPosts['slug'] = Str::slug($dataPosts['name']) . '-' . $dataPosts['sku'];
-
         if ($request->hasFile('img_thumbnail')) {
             $dataPosts['img_thumbnail'] = Storage::put(self::PATH_UPLOAD, $request->file('img_thumbnail'));
         }
 
         $dataPostTags = $request->tags;
         $dataPhotos = [];
-        
+
         try {
             DB::beginTransaction();
 
-            if ($request->author_type === 'newAuthor') {
-                $author = Author::query()->create($request->author);
-                $authorId = $author->id;
-            } else {
-                $authorId = $request->author_id;
-            }
+            $post = Post::query()->create($dataPosts);
 
-            $post = Post::query()->create([
-                'category_id' => $request->category_id,
-                'author_id' => $authorId,
-                'name' => $request->name,
-                'slug' => $dataPosts['slug'],
-                'sku' => $request->sku,
-                'img_thumbnail' => $dataPosts['img_thumbnail'],
-                'overview' => $request->overview,
-                'content' => $request->content,
-                'is_hot' => $dataPosts['is_hot'],
-                'is_active' => $dataPosts['is_active'],
-            ]);
-            
             if ($request->hasFile('photos')) {
                 foreach ($request->file('photos') as $photo) {
                     $path = Storage::put(self::PATH_UPLOAD, $photo);
@@ -114,6 +106,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        $this->authorize('view', $post);
         $categories = Category::query()->pluck('name', 'id');
         $tags = Tag::query()->pluck('name', 'id');
         return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'tags', 'post'));
@@ -124,6 +117,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
         $categories = Category::query()->pluck('name', 'id');
         $tags = Tag::query()->pluck('name', 'id');
         return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'tags', 'post'));
@@ -134,6 +128,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $this->authorize('update', $post);
         $dataPosts = $request->except(['tags', 'photos', 'img_thumbnail']);
         $dataPosts['is_active'] = isset($dataPosts['is_active']) ? 1 : 0;
 
@@ -202,6 +197,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
         try {
             DB::beginTransaction();
 

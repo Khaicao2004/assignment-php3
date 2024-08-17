@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             // $post->tags()->attach($tags);
         Schema::disableForeignKeyConstraints();
         Tag::truncate();
-        Author::truncate();
+        Author::truncate(); 
         Post::truncate();
         Category::truncate();
         for ($i=0; $i < 10; $i++) { 
