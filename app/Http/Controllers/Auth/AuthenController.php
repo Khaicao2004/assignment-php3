@@ -11,8 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class AuthenController extends Controller
 {
     public function showFormLogin(){
-        $categories = Category::query()->pluck('name', 'id');
-        return view('auth.login', compact('categories'));
+        $parentCategories = Category::query()
+        ->with('children') // Load danh mục con
+        ->whereNull('parent_id') // Lấy các danh mục cha (có parent_id là null)
+        ->get();
+        return view('auth.login', compact('parentCategories'));
      }
      public function login(Request $request){
         $credentials = $request->validate([
@@ -37,8 +40,11 @@ class AuthenController extends Controller
      }
      public function showFormRegister()
      {
-        $categories = Category::query()->pluck('name', 'id');
-        return view('auth.register', compact('categories'));
+        $parentCategories = Category::query()
+        ->with('children') // Load danh mục con
+        ->whereNull('parent_id') // Lấy các danh mục cha (có parent_id là null)
+        ->get();
+        return view('auth.register', compact('parentCategories'));
      }
      public function register(Request $request)
      {

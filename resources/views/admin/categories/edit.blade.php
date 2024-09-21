@@ -5,6 +5,15 @@
 @endsection
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('categories.update', $category) }}" method="POST">
         @csrf
         @method('PUT')
@@ -17,15 +26,27 @@
                     <div class="card-body">
                         <div class="live-preview">
                             <div class="row gy-4">
-                                <div class="col-md-4">
+                                <div class="col-6">
                                     <div>
                                         <label for="name" class="form-label">Name</label>
                                         <input type="text" class="form-control mb-2" id="name" name="name"
                                             value="{{ $category->name }}">
-                                        @error('name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="parent_id" class="form-label">Loại tin cha</label>
+                                    <select id="" class="js-example-basic-single form-control" name="parent_id"
+                                        id="parent_id">
+                                        @php($parent_id = $category->parent_id)
+                                        @foreach ($parentCategories as $parent)
+                                            @php($each = ' ')
+                                            @include('admin.categories.nested-category-edit', [
+                                                'category' => $parent,
+                                                'parent_id' => $parent_id,
+                                            ])
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="row">

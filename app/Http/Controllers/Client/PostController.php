@@ -14,7 +14,10 @@ class PostController extends Controller
 {
     public function loaiTin(string $slug)
     {
-        $categories = Category::query()->pluck('name', 'slug');
+        $parentCategories = Category::query()
+        ->with('children') // Load danh mục con
+        ->whereNull('parent_id') // Lấy các danh mục cha (có parent_id là null)
+        ->get();
         $category = Category::query()->where('slug', $slug)->firstOrFail();
         $posts = Post::query()->where('category_id', $category->id)
             ->with(['category', 'author', 'tags'])->get();
@@ -22,14 +25,17 @@ class PostController extends Controller
             return redirect()->route('home');
         }
         $category = $posts->first()->category;
-        return view('client.loai-tin', compact('categories', 'posts', 'category'));
+        return view('client.loai-tin', compact('parentCategories', 'posts', 'category'));
     }
     public function detail($slug)
     {
-        $categories = Category::query()->pluck('name', 'slug');
+        $parentCategories = Category::query()
+        ->with('children') // Load danh mục con
+        ->whereNull('parent_id') // Lấy các danh mục cha (có parent_id là null)
+        ->get();
         $post = Post::query()->with('photos')->where('slug', $slug)->firstOrFail();
         $post->increment('is_view');
-        return view('client.chi-tiet', compact('post', 'categories'));
+        return view('client.chi-tiet', compact('post', 'parentCategories'));
     }
     public function binhLuan(Request $request, $slug)
     {

@@ -14,18 +14,32 @@
                 <div class="card-body">
                     <div class="live-preview">
                         <div class="row gy-4">
-                            <div class="col-md-6">
-                                <div>
-                                    <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name"
-                                        value="{{ $category->name }}" disabled>
+                            <div class="card">
+                                <div class="card-body">
+                                    <p><strong>ID:</strong> {{ $category->id }}</p>
+                                    <p><strong>Tên:</strong> {{ $category->name }}</p>
+                                    <p><strong>Danh mục cha:</strong>
+                                        @if ($category->parent)
+                                            {{ $category->parent->name }}
+                                        @else
+                                            N/A
+                                        @endif
+                                    </p>
+                                    <p><strong>Danh mục con:</strong></p>
+                                    <ul>
+                                        @forelse($category->children as $child)
+                                            <li>{{ $child->name }}</li>
+                                        @empty
+                                            <li>Không có danh mục con</li>
+                                        @endforelse
+                                    </ul>
                                 </div>
                             </div>
+                            <a href="{{ route('categories.index') }}" class="btn btn-primary mt-3">Quay lại danh sách</a>
                         </div>
+                        <!--end row-->
                     </div>
-                    <!--end row-->
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

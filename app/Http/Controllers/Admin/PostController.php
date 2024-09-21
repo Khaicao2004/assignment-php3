@@ -55,12 +55,11 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePostRequest $request)
+    public function store(Request $request)
     {
-        // Log::info('Request Data:', $request->all());
         $this->authorize('create', Post::class);
         $dataPosts = $request->except(['tags', 'photos', 'img_thumbnail']);
-        $dataPosts['author_id'] =  Auth::user()->id;
+        $dataPosts['author_id'] =  Auth::user()->author->id;
         $dataPosts['is_hot'] = isset($dataPosts['is_hot']) ? 1 : 0;
         $dataPosts['is_active'] = isset($dataPosts['is_active']) ? 1 : 0;
         $dataPosts['slug'] = Str::slug($dataPosts['name']) . '-' . $dataPosts['sku'];

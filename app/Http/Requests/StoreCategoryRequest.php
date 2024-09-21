@@ -22,15 +22,18 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3|max:20'
+            'name' => 'required|string|max:255|min:3|unique:categories,name',
+            'parent_id' => 'nullable|exists:categories,id',
         ];
     }
     public function messages(): array
     {
         return [
-            'name.required' => 'Trường name là bắt buộc!!!!',
-            'name.max' => 'Tối đa 20 ký tự',
+            'name.required' => 'Tên danh mục là bắt buộc!!!!',
+            'name.unique' => 'Tên danh mục đã tồn tại.',
+            'name.max' => 'Tối đa 50 ký tự',
             'name.min' => 'Tối thiểu 3 ký tự',
+            'parent_id.exists' => 'Danh mục cha không hợp lệ.',
         ];
     }
 }

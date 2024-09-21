@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 class CategoryController extends Controller
 {
@@ -16,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-       $data = Category::query()->latest('id')->get();
+       $data = Category::query()->with(['children.parent'])->latest('id')->get();
        return view(self::PATH_VIEW . __FUNCTION__, compact('data'));
     }
 
@@ -25,7 +26,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view(self::PATH_VIEW . __FUNCTION__);
+        $parentCategories = Category::query()->with(['children'])->whereNull('parent_id')->get();
+        return view(self::PATH_VIEW . __FUNCTION__, compact('parentCategories'));
     }
 
     /**
@@ -42,7 +44,8 @@ class CategoryController extends Controller
             ->route('categories.index')
             ->with('success','Thêm thành công');
         } catch (\Exception $exception) {
-            return back()->with('error', $exception->getMessage());
+            Log::error('Lỗi thêm danh mục ' . $exception->getMessage());
+            return back()->with('error', 'Lỗi thêm danh mục');
         }
        
     }
@@ -60,7 +63,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view(self::PATH_VIEW . __FUNCTION__, compact('category'));
+        $parentCategories = Category::query()->with(['children'])->whereNull('parent_id')->get();
+        return view(self::PATH_VIEW . __FUNCTION__, compact('category','parentCategories'));
     }
 
     /**
@@ -74,7 +78,8 @@ class CategoryController extends Controller
             $category->update($data);
             return back()->with('success', 'Cập nhật thành công');
         } catch (\Exception $exception) {
-            return back()->with('error', $exception->getMessage());
+            Log::error('Lỗi cập nhật danh mục' . $exception->getMessage());
+            return back()->with('error', 'Lỗi cập nhật danh mục');
         }
     }
 
@@ -83,7 +88,12 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
-        return back()->with('success', 'Xóa thành công');
+        try {
+            $category->delete();
+            return back()->with('success', 'Xóa đơn vị thành công');
+        } catch (\Exception $exception) {
+            Log::error('Lỗi xóa danh mục sản phẩm ' . $exception->getMessage());
+            return back()->with('error', 'Lỗi xóa đơn vị');
+        }
     }
 }

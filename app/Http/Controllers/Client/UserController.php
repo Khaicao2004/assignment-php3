@@ -17,9 +17,12 @@ class UserController extends Controller
 {
     public function profile()
     {
-        $categories = Category::query()->pluck('name', 'slug');
+        $parentCategories = Category::query()
+        ->with('children') // Load danh mục con
+        ->whereNull('parent_id') // Lấy các danh mục cha (có parent_id là null)
+        ->get();
         $user = Auth::user();
-        return view('client.profile', compact('user', 'categories'));
+        return view('client.profile', compact('user', 'parentCategories'));
     }
     public function updateProfile(Request $request, User $user)
     {
@@ -39,8 +42,11 @@ class UserController extends Controller
     }
     public function showFormAccount()
     {
-        $categories = Category::query()->pluck('name', 'slug');
-        return view('client.upgrade-account', compact('categories'));
+        $parentCategories = Category::query()
+        ->with('children') // Load danh mục con
+        ->whereNull('parent_id') // Lấy các danh mục cha (có parent_id là null)
+        ->get();
+        return view('client.upgrade-account', compact('parentCategories'));
     }
     public function upgradeAccount(Request $request)
     {

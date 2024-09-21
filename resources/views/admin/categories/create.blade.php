@@ -5,6 +5,15 @@
 @endsection
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
@@ -19,18 +28,30 @@
                                 <div class="col-6">
                                     <div>
                                         <label for="name" class="form-label">Name</label>
-                                        <input type="text" class="form-control mb-2" id="name" name="name" value="{{ old('name') }}">
-                                        @error('name')
-                                            <span class="text-danger">{{$message}}</span>
-                                        @enderror
+                                        <input type="text" class="form-control mb-2" id="name" name="name"
+                                            value="{{ old('name') }}">
                                     </div>
                                 </div>
-                                     <div class="col-6">
-                                       <div class="form-check form-switch form-switch-primary">
-                                         <input class="form-check-input" type="checkbox" role="switch" name="is_active" id="is_active" checked>
-                                         <label class="form-check-label" for="is_active">Is Active</label>
-                                     </div>
-                                     </div>
+                                <div class="col-6">
+                                    <label for="parent_id" class="form-label">Đơn vị tính cha</label>
+                                    <select class="js-example-basic-single form-control" name="parent_id" id="parent_id">
+                                        <option value="" selected>Trống</option>
+
+                                        @foreach ($parentCategories as $parent)
+                                            @php($each = ' ')
+                                            @include('admin.categories.nested-category', [
+                                                'category' => $parent,
+                                            ])
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check form-switch form-switch-primary">
+                                        <input class="form-check-input" type="checkbox" role="switch" name="is_active"
+                                            id="is_active" checked>
+                                        <label class="form-check-label" for="is_active">Is Active</label>
+                                    </div>
+                                </div>
                                 <!--end col-->
                             </div>
                             <!--end row-->

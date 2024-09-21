@@ -1,11 +1,11 @@
 @extends('admin.layouts.master')
 
 @section('title')
-   Cập nhật bài viết {{ $post->id }}
+    Cập nhật bài viết {{ $post->id }}
 @endsection
 
 @section('content')
-    <form action="{{ route('posts.update',$post) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('posts.update', $post) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row">
@@ -20,56 +20,57 @@
                                 <div class="col-md-4">
                                     <div>
                                         <label for="name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" value="{{ $post->name }}"  >
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            value="{{ $post->name }}">
                                     </div>
                                     <div class="mt-3">
                                         <label for="sku" class="form-label">Sku</label>
                                         <input type="text" class="form-control" id="sku" name="sku"
-                                        value="{{ $post->sku }}" disabled>
+                                            value="{{ $post->sku }}" disabled>
                                     </div>
                                     <div class="mt-3">
-                                        <label for="category_id" class="form-label">Categories</label>        
+                                        <label for="category_id" class="form-label">Categories</label>
                                         <select name="category_id" id="category_id" class="form-select">
-                                          @foreach ($categories as $id => $name)
-                                              <option value="{{$id }}"
-                                              @if ($post->category_id == $id)
-                                                  selected
-                                              @endif
-                                              >{{ $name }}</option>
-                                          @endforeach
-                                      </select>
+                                            @foreach ($categories as $id => $name)
+                                                <option value="{{ $id }}"
+                                                    @if ($post->category_id == $id) selected @endif>{{ $name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="mt-3">
                                         <label for="img_thumbnail" class="form-label">Img Thumbnail</label><br>
                                         @php
-                                        $url = $post->img_thumbnail;
-                                        if (!Str::contains($url, 'http')){
-                                            $url =  Storage::url($url);
-                                        }
-                                    @endphp 
-                    
-                                    <img src="{{ $url }}" alt="" width="200px">
-                                    <input type="file" class="form-control mt-3" id="img_thumbnail" name="img_thumbnail">
+                                            $url = $post->img_thumbnail;
+                                            if (!Str::contains($url, 'http')) {
+                                                $url = Storage::url($url);
+                                            }
+                                        @endphp
+
+                                        <img src="{{ $url }}" alt="" width="200px">
+                                        <input type="file" class="form-control mt-3" id="img_thumbnail"
+                                            name="img_thumbnail">
                                     </div>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="row">
                                         <div class="col-md-2">
                                             <div class="form-check form-switch form-switch-primary">
-                                                <input class="form-check-input" type="checkbox" role="switch" name="is_active"
-                                                id="is_active" @if ($post->is_active === 1)checked @endif >
-                                               <label class="form-check-label" for="is_active">Is Active</label>
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    name="is_active" id="is_active"
+                                                    @if ($post->is_active === 1) checked @endif>
+                                                <label class="form-check-label" for="is_active">Is Active</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="mt-3">
                                             <label for="overview" class="form-label">Overview</label>
-                                            <textarea class="form-control" name="overview" id="overview" rows="2" >{{ $post->overview }}</textarea>
+                                            <textarea class="form-control" name="overview" id="overview" rows="2">{{ $post->overview }}</textarea>
                                         </div>
                                         <div class="mt-3">
                                             <label for="content" class="form-label">Content</label>
-                                            <textarea class="form-control" name="content" id="content" >{{ $post->content }}</textarea>
+                                            <textarea class="form-control" name="content" id="content">{{ $post->content }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -95,9 +96,10 @@
                                     <label for="tags" class="form-label">Photos</label>
                                     <div class="row mb-3">
                                         @foreach ($post->photos as $photo)
-                                        <div class="col-12 col-md-4 col-lg-3">
-                                            <img src="{{ Storage::url($photo->file_path) }}" alt="" width="100">
-                                        </div>
+                                            <div class="col-12 col-md-4 col-lg-3">
+                                                <img src="{{ Storage::url($photo->file_path) }}" alt=""
+                                                    width="100">
+                                            </div>
                                         @endforeach
                                     </div>
                                     <input type="file" name="photos[]" id="photos" class="form-control" multiple>
@@ -124,14 +126,12 @@
                                     <div>
                                         <label for="tags" class="form-label">Tags </label><br>
                                         <select name="tags[]" id="tags" class="form-control" multiple>
-                                          @foreach ($tags as $id => $name)
-                                              <option value="{{ $id }}" 
-                                              @if ($post->tags->contains($id))
-                                                  selected
-                                              @endif
-                                              >{{ $name }}</option>
-                                          @endforeach
-                                      </select>
+                                            @foreach ($tags as $id => $name)
+                                                <option value="{{ $id }}"
+                                                    @if ($post->tags->contains($id)) selected @endif>{{ $name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
 
@@ -156,7 +156,9 @@
     </form>
 @endsection
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.8.0/ckeditor.js" integrity="sha512-lKwk82OTcXaujpLk2G2rplJ8ntniQ5fV/1qlg7EMqyF88lJsEgZaVFP9wxb/ZSCop7CfTsAxnTUg/vvZlFzyQw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.8.0/ckeditor.js"
+    integrity="sha512-lKwk82OTcXaujpLk2G2rplJ8ntniQ5fV/1qlg7EMqyF88lJsEgZaVFP9wxb/ZSCop7CfTsAxnTUg/vvZlFzyQw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 @section('scripts')
     <script>

@@ -35,6 +35,7 @@
                                     <div class="mt-3">
                                         <label for="category_id" class="form-label">Categories</label>
                                         <select name="category_id" id="category_id" class="form-select">
+                                            <option value="">--Chọn danh mục--</option>
                                             @foreach ($categories as $id => $name)
                                                 <option value="{{ $id }}">{{ $name }}</option>
                                             @endforeach
